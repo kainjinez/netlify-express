@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     req.connection.socket.remoteAddress;
 
   res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.write('<h1>Hello from Express.js!</h1>');
+  // res.write('<h1>Hello from Express.js!</h1>');
   res.write('IP: ' + ip);
   res.end();
 });
