@@ -15,9 +15,12 @@ router.get('/', (req, res) => {
     req.socket.remoteAddress ||
     req.connection.socket.remoteAddress;
 
-  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.writeHead(200, { 'Content-Type': 'application/json' });
   // res.write('<h1>Hello from Express.js!</h1>');
-  res.write('IP: ' + ip);
+  var response = {
+    ip: ip
+  };
+  res.write(JSON.stringify(response));
   res.end();
 });
 
