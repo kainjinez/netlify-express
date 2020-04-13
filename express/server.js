@@ -6,12 +6,21 @@ const app = express();
 const bodyParser = require('body-parser');
 
 const router = express.Router();
+router.get('/anotherone', (req, res) => {
+  res.json({ route: req.originalUrl })
+});
 router.get('/', (req, res) => {
+  var ip = (req.headers['x-forwarded-for'] || '').split(',').pop() ||
+    req.connection.remoteAddress ||
+    req.socket.remoteAddress ||
+    req.connection.socket.remoteAddress;
+
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.write('<h1>Hello from Express.js!</h1>');
+  res.write('IP: ' + ip);
   res.end();
 });
-router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
+
 router.post('/', (req, res) => res.json({ postBody: req.body }));
 
 app.use(bodyParser.json());
